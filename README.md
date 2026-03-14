@@ -430,5 +430,5 @@ If you use this prototype in your research, please cite:
 
 ## License
 
-MIT © 2025 — Seid Mehammed, Arnab Kumar Biswas, Shakir Khan
+MIT © 2025 — Seid Mehammed
 #
