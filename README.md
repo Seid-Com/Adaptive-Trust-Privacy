@@ -431,5 +431,4 @@ If you use this prototype in your research, please cite:
 ## License
 
 MIT © 2025 — Seid Mehammed, Arnab Kumar Biswas, Shakir Khan
-#   A d a p t i v e - T r u s t - P r i v a c y  
- 
+#
