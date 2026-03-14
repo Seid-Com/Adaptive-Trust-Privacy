@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "TA-ADP Federated Learning Prototype"
+version = "1.0.0"
+id = "artifacts/ta-adp-fl"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 24659
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/ta-adp-fl run dev"
+
+[services.env]
+PORT = "24659"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/ta-adp-fl", "run", "build"]
+publicDir = "artifacts/ta-adp-fl/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
