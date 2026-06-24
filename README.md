@@ -3,7 +3,7 @@
 >
 > *"Trust-Aware Adaptive Differential Privacy "*
 > **Seid Mehammed Abdu · Dr. Arnab Kumar Biswas · Shakir Khan, Dr. Seid Kassaw**
-> *IEEE Access (Under Review)*
+> 
 
 ---
 
