@@ -1,0 +1,438 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: TA-ADP Federated Learning Prototype API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: simulation
+    description: Federated Learning simulation operations
+  - name: clients
+    description: IoT client device management
+  - name: rounds
+    description: Federated Learning round management
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /simulation/config:
+    get:
+      operationId: getSimulationConfig
+      tags: [simulation]
+      summary: Get simulation configuration
+      responses:
+        "200":
+          description: Simulation configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationConfig"
+    put:
+      operationId: updateSimulationConfig
+      tags: [simulation]
+      summary: Update simulation configuration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulationConfig"
+      responses:
+        "200":
+          description: Updated configuration
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationConfig"
+
+  /simulation/run:
+    post:
+      operationId: runSimulation
+      tags: [simulation]
+      summary: Run a complete FL simulation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SimulationRunRequest"
+      responses:
+        "200":
+          description: Simulation results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimulationResult"
+
+  /simulation/results:
+    get:
+      operationId: getSimulationResults
+      tags: [simulation]
+      summary: Get all stored simulation results
+      responses:
+        "200":
+          description: List of simulation results
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/SimulationResult"
+
+  /clients:
+    get:
+      operationId: listClients
+      tags: [clients]
+      summary: List all IoT client devices
+      responses:
+        "200":
+          description: List of IoT clients
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IoTClient"
+    post:
+      operationId: createClient
+      tags: [clients]
+      summary: Create a new IoT client
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateClientRequest"
+      responses:
+        "201":
+          description: Created client
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IoTClient"
+
+  /clients/{clientId}:
+    get:
+      operationId: getClient
+      tags: [clients]
+      summary: Get a specific IoT client
+      parameters:
+        - name: clientId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: IoT client details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IoTClient"
+
+  /rounds:
+    get:
+      operationId: listRounds
+      tags: [rounds]
+      summary: List federated learning rounds
+      parameters:
+        - name: simulationId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of FL rounds
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/FLRound"
+
+  /rounds/{roundId}/client-updates:
+    get:
+      operationId: getRoundClientUpdates
+      tags: [rounds]
+      summary: Get client updates for a specific round
+      parameters:
+        - name: roundId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Client updates for this round
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ClientUpdate"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    SimulationConfig:
+      type: object
+      properties:
+        numClients:
+          type: integer
+          description: Total number of IoT devices
+        numRounds:
+          type: integer
+          description: Number of federated learning rounds
+        baseEpsilon:
+          type: number
+          description: Base privacy budget (epsilon)
+        baseDelta:
+          type: number
+          description: Base delta for (epsilon, delta)-DP
+        minTrustScore:
+          type: number
+          description: Minimum trust score threshold for client selection
+        resourceThreshold:
+          type: number
+          description: Minimum resource capacity for participation
+        alphaWeight:
+          type: number
+          description: Weight for trust score in noise scaling (alpha)
+        betaWeight:
+          type: number
+          description: Weight for resource capacity in noise scaling (beta)
+        dataset:
+          type: string
+          enum: [TON-IoT, Edge-IIoTset, Bot-IoT]
+          description: Dataset used for simulation
+      required:
+        - numClients
+        - numRounds
+        - baseEpsilon
+        - baseDelta
+        - minTrustScore
+        - resourceThreshold
+        - alphaWeight
+        - betaWeight
+        - dataset
+
+    SimulationRunRequest:
+      type: object
+      properties:
+        configId:
+          type: integer
+          nullable: true
+        name:
+          type: string
+      required:
+        - name
+
+    SimulationResult:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        dataset:
+          type: string
+        numClients:
+          type: integer
+        numRounds:
+          type: integer
+        finalAccuracy:
+          type: number
+        finalLoss:
+          type: number
+        avgPrivacyLoss:
+          type: number
+        avgCommunicationCost:
+          type: number
+        avgEnergyConsumption:
+          type: number
+        convergenceRound:
+          type: integer
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        rounds:
+          type: array
+          items:
+            $ref: "#/components/schemas/FLRound"
+      required:
+        - id
+        - name
+        - dataset
+        - numClients
+        - numRounds
+        - finalAccuracy
+        - finalLoss
+        - avgPrivacyLoss
+        - avgCommunicationCost
+        - avgEnergyConsumption
+        - createdAt
+        - rounds
+
+    FLRound:
+      type: object
+      properties:
+        id:
+          type: integer
+        simulationId:
+          type: integer
+        roundNumber:
+          type: integer
+        globalAccuracy:
+          type: number
+        globalLoss:
+          type: number
+        numSelectedClients:
+          type: integer
+        avgNoiseScale:
+          type: number
+        avgTrustScore:
+          type: number
+        cumulativePrivacyLoss:
+          type: number
+        communicationCost:
+          type: number
+        energyConsumed:
+          type: number
+      required:
+        - id
+        - simulationId
+        - roundNumber
+        - globalAccuracy
+        - globalLoss
+        - numSelectedClients
+        - avgNoiseScale
+        - avgTrustScore
+        - cumulativePrivacyLoss
+        - communicationCost
+        - energyConsumed
+
+    ClientUpdate:
+      type: object
+      properties:
+        id:
+          type: integer
+        roundId:
+          type: integer
+        clientId:
+          type: integer
+        clientName:
+          type: string
+        deviceType:
+          type: string
+        trustScore:
+          type: number
+        resourceCapacity:
+          type: number
+        noiseScale:
+          type: number
+        localAccuracy:
+          type: number
+        privacyBudgetUsed:
+          type: number
+        communicationBytes:
+          type: integer
+        energyUsed:
+          type: number
+        selected:
+          type: boolean
+      required:
+        - id
+        - roundId
+        - clientId
+        - clientName
+        - deviceType
+        - trustScore
+        - resourceCapacity
+        - noiseScale
+        - localAccuracy
+        - privacyBudgetUsed
+        - communicationBytes
+        - energyUsed
+        - selected
+
+    IoTClient:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        deviceType:
+          type: string
+          enum: [sensor, wearable, industrial, vehicle, gateway]
+        trustScore:
+          type: number
+        computeCapacity:
+          type: number
+        batteryLevel:
+          type: number
+        bandwidthMbps:
+          type: number
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - deviceType
+        - trustScore
+        - computeCapacity
+        - batteryLevel
+        - bandwidthMbps
+        - isActive
+        - createdAt
+
+    CreateClientRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        deviceType:
+          type: string
+          enum: [sensor, wearable, industrial, vehicle, gateway]
+        trustScore:
+          type: number
+        computeCapacity:
+          type: number
+        batteryLevel:
+          type: number
+        bandwidthMbps:
+          type: number
+      required:
+        - name
+        - deviceType
+        - trustScore
+        - computeCapacity
+        - batteryLevel
+        - bandwidthMbps

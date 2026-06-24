@@ -1,0 +1,17 @@
+packages:
+  "recharts": "Powerful, responsive charting library for scientific data visualization"
+  "framer-motion": "For premium, smooth page transitions and interactive micro-animations"
+  "lucide-react": "Beautiful, consistent icon set for the sidebar and UI elements"
+  "date-fns": "For formatting simulation timestamps elegantly"
+
+images:
+  - path: "artifacts/ta-adp-fl/public/images/about-hero.png"
+    description: "A dark, premium, glowing abstract visualization of a neural network overlaying a smart city, representing federated learning in IoT. Cyan and deep purple glowing nodes, professional scientific style, high contrast dark background."
+    aspect_ratio: "21:9"
+  - path: "artifacts/ta-adp-fl/public/images/empty-state.png"
+    description: "Abstract minimal 3d geometric shapes floating in dark space with subtle cyan edge lighting. Used for empty data states."
+    aspect_ratio: "1:1"
+
+notes:
+  - "Assuming shadcn/ui components are available in @/components/ui based on the directory structure."
+  - "React Query hooks are imported directly from @workspace/api-client-react as instructed."
