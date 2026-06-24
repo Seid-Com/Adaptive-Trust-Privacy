@@ -1,11 +1,8 @@
-# TA-ADP: Trust-Aware Adaptive Differential Privacy for Federated Learning in Heterogeneous IoT Environments
+# TA-ADP: Trust-Aware Adaptive Differential Privacy 
 
-> **Research Prototype & Paper Companion Tool**
 >
-> Interactive simulation dashboard, IEEE publication toolkit, and federated learning visualizer for the manuscript:
->
-> *"Trust-Aware Adaptive Differential Privacy for Resource-Constrained Federated Learning in Heterogeneous IoT Environments"*
-> **Seid Mehammed Abdu · Dr. Arnab Kumar Biswas · Shakir Khan**
+> *"Trust-Aware Adaptive Differential Privacy "*
+> **Seid Mehammed Abdu · Dr. Arnab Kumar Biswas · Shakir Khan, Dr. Seid Kassaw**
 > *IEEE Access (Under Review)*
 
 ---
@@ -43,23 +40,12 @@
 
 ## Overview
 
-This repository is the companion prototype for the **TA-ADP** framework paper. It provides:
+This repository is the companion prototype for the **TA-ADP** framework . It provides:
 
 - **Live FL simulation** — runs federated learning rounds with adaptive Gaussian noise per IoT device
 - **Automatic seeding** — on first startup, seeds 20 heterogeneous IoT devices and runs 3 baseline simulations (TON-IoT, Edge-IIoTset, Bot-IoT) with zero configuration
-- **IEEE publication toolkit** — generates Table 3a (per-dataset method comparison), reviewer response letters, and publication-quality figures — all downloadable as `.doc` and `.png`
+
 - **Full REST API** — every simulation, round, and client update is persisted in PostgreSQL and queryable via OpenAPI-specified endpoints
-
-### What TA-ADP Does
-
-Traditional DP-based federated learning applies **uniform noise** to all devices, ignoring heterogeneity in trust and resources. TA-ADP solves this by:
-
-| Problem | TA-ADP Solution |
-|---|---|
-| Uniform noise damages accurate clients | Per-device adaptive noise scaling |
-| Untrusted clients degrade the global model | Trust score integration into noise formula |
-| Resource-limited devices waste participation | Resource-aware client selection |
-| No formal privacy accounting | RDP composition with mandatory noise floor |
 
 ---
 
@@ -99,10 +85,7 @@ The framework provides formal **(ε, δ)-Differential Privacy** using:
 | **Training Rounds** | `/rounds` | Per-round metrics table and charts: global accuracy, loss, avg noise scale, avg trust score, cumulative privacy loss, communication cost, energy consumed. |
 | **IoT Clients** | `/clients` | Device registry: sensor/wearable/industrial/vehicle/gateway types, trust score bars, compute/battery/bandwidth indicators. |
 | **Privacy Analysis** | `/privacy` | Scatter plot of trust score vs. assigned noise scale per client. Privacy budget allocation and composition analysis. |
-| **Table 3a Generator** | `/table3a` | IEEE-ready per-dataset performance table (8 methods × 3 datasets × 5 metrics). Click any cell to enter real experimental values. Exports as `.tex` and `.doc`. |
-| **Reviewer Response** | `/rebuttal` | Auto-generated point-by-point rebuttal letter for Reviewer 1 and Reviewer 3. Pre-filled from simulation results. Fill in Manuscript ID and download as `.doc`. |
-| **IEEE Figures Export** | `/figures` | Three publication-quality figures rendered at 300 DPI, 7.16" double-column width, Wong colourblind-safe palette. Download as PNG. |
-| **About TA-ADP** | `/about` | Framework explanation, key equations, paper abstract, contribution summary. |
+
 
 ---
 
@@ -271,8 +254,6 @@ The simulation engine models the statistical properties of three real-world IoT 
 ```
 Train: 70% · Validation: 10% · Test: 20%
 ```
-
-Use the **Table 3a Generator** page (`/table3a`) to enter real experimental results from your Python runs and export a publication-ready IEEE table.
 
 ---
 
@@ -475,52 +456,12 @@ pnpm --filter @workspace/api-server run build
 
 ## Citation
 
-If this prototype contributes to your research, please cite:
 
-```bibtex
-@article{abdu2025taadp,
-  title   = {Trust-Aware Adaptive Differential Privacy for Resource-Constrained
-             Federated Learning in Heterogeneous IoT Environments},
-  author  = {Abdu, Seid Mehammed and Biswas, Arnab Kumar and Khan, Shakir},
-  journal = {IEEE Access},
-  year    = {2025},
-  note    = {Under review. Prototype: https://github.com/<your-username>/ta-adp-fl-prototype}
-}
-```
 
-### Related datasets
 
-```bibtex
-@article{ferrag2022edgeiiotset,
-  title   = {Edge-IIoTset: A New Comprehensive Realistic Cyber Security Dataset of IoT and IIoT Applications},
-  author  = {Ferrag, Mohamed Amine and Friha, Othmane and Hamouda, Djallel and Maglaras, Leandros and Janicke, Helge},
-  journal = {IEEE Access},
-  volume  = {10},
-  pages   = {40281--40306},
-  year    = {2022}
-}
-
-@article{alsaedi2020toniot,
-  title   = {TON\_IoT Telemetry Dataset: A New Generation Dataset of IoT and IIoT for Data-Driven Intrusion Detection Systems},
-  author  = {Alsaedi, Abdullah and Moustafa, Nour and Tari, Zahir and Mahmood, Abdun and Anwar, Adnan},
-  journal = {IEEE Access},
-  volume  = {8},
-  pages   = {165130--165150},
-  year    = {2020}
-}
-
-@article{koroniotis2019botiot,
-  title   = {Towards the Development of Realistic Botnet Dataset in the Internet of Things for Network Forensic Analytics},
-  author  = {Koroniotis, Nickolaos and Moustafa, Nour and Sitnikova, Elena and Turnbull, Benjamin},
-  journal = {Future Generation Computer Systems},
-  volume  = {100},
-  pages   = {779--796},
-  year    = {2019}
-}
-```
 
 ---
 
 ## License
 
-MIT © 2025 — Seid Mehammed Abdu, Arnab Kumar Biswas, Shakir Khan
+MIT © 2025 — Seid Mehammed Abdu, Arnab Kumar Biswas, Shakir Khan, Dr. Seid Kassaw
