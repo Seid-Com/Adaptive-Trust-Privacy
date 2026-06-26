@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, real, boolean, text } from "drizzle-orm/pg-core";
+import { pgTable, serial, integer, real, boolean, text, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 import { flRoundsTable } from "./rounds";
@@ -18,7 +18,10 @@ export const clientUpdatesTable = pgTable("client_updates", {
   communicationBytes: integer("communication_bytes").notNull(),
   energyUsed: real("energy_used").notNull(),
   selected: boolean("selected").notNull().default(true),
-});
+}, (t) => [
+  index("idx_client_updates_round_id").on(t.roundId),
+  index("idx_client_updates_client_id").on(t.clientId),
+]);
 
 export const insertClientUpdateSchema = createInsertSchema(clientUpdatesTable).omit({ id: true });
 export type InsertClientUpdate = z.infer<typeof insertClientUpdateSchema>;

@@ -4,13 +4,18 @@ import {
   simulationsTable,
   flRoundsTable,
   clientUpdatesTable,
-  iotClientsTable,
 } from "@workspace/db/schema";
 import { eq } from "drizzle-orm";
+import {
+  runSimulation,
+  seedClientsIfEmpty,
+  type SimulationConfig,
+} from "../lib/simulation-engine";
 
 const router: IRouter = Router();
 
-const DEFAULT_CONFIG = {
+const DEFAULT_CONFIG: SimulationConfig = {
+  name: "",
   numClients: 20,
   numRounds: 30,
   baseEpsilon: 1.0,
@@ -33,102 +38,18 @@ router.put("/config", (req, res) => {
   res.json(currentConfig);
 });
 
-function computeNoiseScale(
-  trustScore: number,
-  resourceCapacity: number,
-  sigmaMax: number,
-  alpha: number,
-  beta: number
-): number {
-  const scale = Math.max(0.1, 1 - alpha * trustScore - beta * resourceCapacity);
-  return sigmaMax * scale;
-}
-
-function computeResourceCapacity(compute: number, battery: number, bandwidth: number): number {
-  return (compute * 0.4 + battery * 0.3 + bandwidth * 0.3);
-}
-
-function simulateRound(
-  round: number,
-  clients: Array<{ id: number; name: string; deviceType: string; trustScore: number; computeCapacity: number; batteryLevel: number; bandwidthMbps: number }>,
-  config: typeof DEFAULT_CONFIG,
-  prevAccuracy: number,
-  prevLoss: number,
-  cumulativePrivacyLoss: number
-) {
-  const sigmaMax = 2.0;
-  const eligible = clients.filter(
-    (c) => c.trustScore >= config.minTrustScore && computeResourceCapacity(c.computeCapacity, c.batteryLevel, c.bandwidthMbps) >= config.resourceThreshold
-  );
-
-  const selected = eligible.slice(0, Math.max(3, Math.floor(eligible.length * 0.7)));
-
-  const clientUpdates = clients.map((client) => {
-    const isSelected = selected.some((s) => s.id === client.id);
-    const resource = computeResourceCapacity(client.computeCapacity, client.batteryLevel, client.bandwidthMbps);
-    const noiseScale = computeNoiseScale(client.trustScore, resource, sigmaMax, config.alphaWeight, config.betaWeight);
-    const localAccuracy = Math.min(0.99, prevAccuracy + Math.random() * 0.02 * client.trustScore - 0.005);
-    const privacyBudget = config.baseEpsilon * noiseScale;
-    const commBytes = Math.floor(500000 * (1 - noiseScale * 0.3) + Math.random() * 50000);
-    const energy = resource * 0.5 + Math.random() * 0.1;
-
-    return {
-      clientId: client.id,
-      clientName: client.name,
-      deviceType: client.deviceType,
-      trustScore: client.trustScore,
-      resourceCapacity: resource,
-      noiseScale,
-      localAccuracy,
-      privacyBudgetUsed: privacyBudget,
-      communicationBytes: commBytes,
-      energyUsed: energy,
-      selected: isSelected,
-    };
-  });
-
-  const selectedUpdates = clientUpdates.filter((u) => u.selected);
-  const avgTrust = selectedUpdates.reduce((s, u) => s + u.trustScore, 0) / (selectedUpdates.length || 1);
-  const avgNoise = selectedUpdates.reduce((s, u) => s + u.noiseScale, 0) / (selectedUpdates.length || 1);
-  const avgComm = selectedUpdates.reduce((s, u) => s + u.communicationBytes, 0) / (selectedUpdates.length || 1);
-  const avgEnergy = selectedUpdates.reduce((s, u) => s + u.energyUsed, 0) / (selectedUpdates.length || 1);
-
-  const convergenceFactor = round / config.numRounds;
-  const accuracyGain = 0.015 * (1 - convergenceFactor) * avgTrust + 0.002;
-  const newAccuracy = Math.min(0.97, prevAccuracy + accuracyGain + (Math.random() - 0.5) * 0.005);
-  const newLoss = Math.max(0.05, prevLoss - 0.02 * (1 - convergenceFactor) - 0.003 + (Math.random() - 0.5) * 0.005);
-
-  const roundPrivacyLoss = config.baseEpsilon * avgNoise;
-  const newCumulativeLoss = cumulativePrivacyLoss + roundPrivacyLoss;
-
-  return {
-    roundData: {
-      roundNumber: round,
-      globalAccuracy: newAccuracy,
-      globalLoss: newLoss,
-      numSelectedClients: selected.length,
-      avgNoiseScale: avgNoise,
-      avgTrustScore: avgTrust,
-      cumulativePrivacyLoss: newCumulativeLoss,
-      communicationCost: avgComm,
-      energyConsumed: avgEnergy,
-    },
-    clientUpdates,
-  };
-}
-
-function autoDetectConfig(name: string | undefined): typeof DEFAULT_CONFIG {
-  if (!name) return { ...currentConfig, numRounds: 50 };
+function autoDetectConfig(name: string | undefined): SimulationConfig {
+  if (!name) return { ...DEFAULT_CONFIG, name: `Auto-Run ${new Date().toISOString()}`, numRounds: 50 };
   if (name.includes("Edge-IIoTset")) {
-    return { ...DEFAULT_CONFIG, dataset: "Edge-IIoTset", numRounds: 50, alphaWeight: 0.5, betaWeight: 0.3, baseEpsilon: 1.0 };
+    return { ...DEFAULT_CONFIG, name, dataset: "Edge-IIoTset", numRounds: 50, alphaWeight: 0.5, betaWeight: 0.3, baseEpsilon: 1.0 };
   }
   if (name.includes("Bot-IoT")) {
-    return { ...DEFAULT_CONFIG, dataset: "Bot-IoT", numRounds: 50, alphaWeight: 0.6, betaWeight: 0.3, baseEpsilon: 0.5, minTrustScore: 0.4 };
+    return { ...DEFAULT_CONFIG, name, dataset: "Bot-IoT", numRounds: 50, alphaWeight: 0.6, betaWeight: 0.3, baseEpsilon: 0.5, minTrustScore: 0.4 };
   }
   if (name.includes("TON-IoT")) {
-    return { ...DEFAULT_CONFIG, dataset: "TON-IoT", numRounds: 50 };
+    return { ...DEFAULT_CONFIG, name, dataset: "TON-IoT", numRounds: 50 };
   }
-  return { ...currentConfig, numRounds: 50 };
+  return { ...currentConfig, name, numRounds: 50 };
 }
 
 router.post("/run", async (req, res) => {
@@ -137,92 +58,9 @@ router.post("/run", async (req, res) => {
     const name: string = body.name ?? `Auto-Run ${new Date().toISOString()}`;
     const config = autoDetectConfig(name);
 
-    let clients = await db.select().from(iotClientsTable).where(eq(iotClientsTable.isActive, true));
-    if (clients.length === 0) {
-      await seedClients(config.numClients);
-      clients = await db.select().from(iotClientsTable).where(eq(iotClientsTable.isActive, true));
-    }
-
-    const [sim] = await db.insert(simulationsTable).values({
-      name,
-      dataset: config.dataset,
-      numClients: clients.length,
-      numRounds: config.numRounds,
-      baseEpsilon: config.baseEpsilon,
-      baseDelta: config.baseDelta,
-      minTrustScore: config.minTrustScore,
-      resourceThreshold: config.resourceThreshold,
-      alphaWeight: config.alphaWeight,
-      betaWeight: config.betaWeight,
-      finalAccuracy: 0,
-      finalLoss: 0,
-      avgPrivacyLoss: 0,
-      avgCommunicationCost: 0,
-      avgEnergyConsumption: 0,
-    }).returning();
-
-    let accuracy = 0.45 + Math.random() * 0.1;
-    let loss = 1.2 + Math.random() * 0.3;
-    let cumulativePrivacyLoss = 0;
-    let convergenceRound: number | null = null;
-    const allRounds = [];
-    const totalPrivacyLoss: number[] = [];
-    const totalCommCosts: number[] = [];
-    const totalEnergy: number[] = [];
-
-    for (let r = 1; r <= config.numRounds; r++) {
-      const { roundData, clientUpdates } = simulateRound(r, clients, config, accuracy, loss, cumulativePrivacyLoss);
-
-      const [insertedRound] = await db.insert(flRoundsTable).values({
-        simulationId: sim.id,
-        ...roundData,
-      }).returning();
-
-      const updatesWithRoundId = clientUpdates.map((u) => ({ roundId: insertedRound.id, ...u }));
-      await db.insert(clientUpdatesTable).values(updatesWithRoundId);
-
-      accuracy = roundData.globalAccuracy;
-      loss = roundData.globalLoss;
-      cumulativePrivacyLoss = roundData.cumulativePrivacyLoss;
-      totalPrivacyLoss.push(roundData.cumulativePrivacyLoss);
-      totalCommCosts.push(roundData.communicationCost);
-      totalEnergy.push(roundData.energyConsumed);
-
-      if (!convergenceRound && accuracy >= 0.90) {
-        convergenceRound = r;
-      }
-
-      allRounds.push({ id: insertedRound.id, simulationId: sim.id, ...roundData });
-    }
-
-    const avgPrivacyLoss = totalPrivacyLoss.reduce((a, b) => a + b, 0) / totalPrivacyLoss.length;
-    const avgCommCost = totalCommCosts.reduce((a, b) => a + b, 0) / totalCommCosts.length;
-    const avgEnergy = totalEnergy.reduce((a, b) => a + b, 0) / totalEnergy.length;
-
-    await db.update(simulationsTable).set({
-      finalAccuracy: accuracy,
-      finalLoss: loss,
-      avgPrivacyLoss,
-      avgCommunicationCost: avgCommCost,
-      avgEnergyConsumption: avgEnergy,
-      convergenceRound,
-    }).where(eq(simulationsTable.id, sim.id));
-
-    res.json({
-      id: sim.id,
-      name: sim.name,
-      dataset: config.dataset,
-      numClients: clients.length,
-      numRounds: config.numRounds,
-      finalAccuracy: accuracy,
-      finalLoss: loss,
-      avgPrivacyLoss,
-      avgCommunicationCost: avgCommCost,
-      avgEnergyConsumption: avgEnergy,
-      convergenceRound,
-      createdAt: sim.createdAt.toISOString(),
-      rounds: allRounds,
-    });
+    await seedClientsIfEmpty(config.numClients);
+    const result = await runSimulation(config);
+    res.json(result);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Simulation failed" });
@@ -231,46 +69,105 @@ router.post("/run", async (req, res) => {
 
 router.get("/results", async (_req, res) => {
   try {
-    const sims = await db.select().from(simulationsTable).orderBy(simulationsTable.createdAt);
-    const results = await Promise.all(
-      sims.map(async (sim) => {
-        const rounds = await db.select().from(flRoundsTable).where(eq(flRoundsTable.simulationId, sim.id));
-        return {
-          id: sim.id,
-          name: sim.name,
-          dataset: sim.dataset,
-          numClients: sim.numClients,
-          numRounds: sim.numRounds,
-          finalAccuracy: sim.finalAccuracy,
-          finalLoss: sim.finalLoss,
-          avgPrivacyLoss: sim.avgPrivacyLoss,
-          avgCommunicationCost: sim.avgCommunicationCost,
-          avgEnergyConsumption: sim.avgEnergyConsumption,
-          convergenceRound: sim.convergenceRound,
-          createdAt: sim.createdAt.toISOString(),
-          rounds,
-        };
+    const sims = await db
+      .select({
+        id: simulationsTable.id,
+        name: simulationsTable.name,
+        dataset: simulationsTable.dataset,
+        numClients: simulationsTable.numClients,
+        numRounds: simulationsTable.numRounds,
+        baseEpsilon: simulationsTable.baseEpsilon,
+        baseDelta: simulationsTable.baseDelta,
+        alphaWeight: simulationsTable.alphaWeight,
+        betaWeight: simulationsTable.betaWeight,
+        minTrustScore: simulationsTable.minTrustScore,
+        resourceThreshold: simulationsTable.resourceThreshold,
+        finalAccuracy: simulationsTable.finalAccuracy,
+        finalLoss: simulationsTable.finalLoss,
+        avgPrivacyLoss: simulationsTable.avgPrivacyLoss,
+        avgCommunicationCost: simulationsTable.avgCommunicationCost,
+        avgEnergyConsumption: simulationsTable.avgEnergyConsumption,
+        convergenceRound: simulationsTable.convergenceRound,
+        createdAt: simulationsTable.createdAt,
+        roundId: flRoundsTable.id,
+        roundNumber: flRoundsTable.roundNumber,
+        globalAccuracy: flRoundsTable.globalAccuracy,
+        globalLoss: flRoundsTable.globalLoss,
+        numSelectedClients: flRoundsTable.numSelectedClients,
+        avgNoiseScale: flRoundsTable.avgNoiseScale,
+        avgTrustScore: flRoundsTable.avgTrustScore,
+        cumulativePrivacyLoss: flRoundsTable.cumulativePrivacyLoss,
+        communicationCost: flRoundsTable.communicationCost,
+        energyConsumed: flRoundsTable.energyConsumed,
       })
-    );
-    res.json(results);
+      .from(simulationsTable)
+      .leftJoin(flRoundsTable, eq(simulationsTable.id, flRoundsTable.simulationId))
+      .orderBy(simulationsTable.createdAt, flRoundsTable.roundNumber);
+
+    const simMap = new Map<number, ReturnType<typeof buildSim>>();
+    for (const row of sims) {
+      if (!simMap.has(row.id)) {
+        simMap.set(row.id, buildSim(row));
+      }
+      const sim = simMap.get(row.id)!;
+      if (row.roundId) {
+        sim.rounds.push({
+          id: row.roundId,
+          simulationId: row.id,
+          roundNumber: row.roundNumber,
+          globalAccuracy: row.globalAccuracy,
+          globalLoss: row.globalLoss,
+          numSelectedClients: row.numSelectedClients,
+          avgNoiseScale: row.avgNoiseScale,
+          avgTrustScore: row.avgTrustScore,
+          cumulativePrivacyLoss: row.cumulativePrivacyLoss,
+          communicationCost: row.communicationCost,
+          energyConsumed: row.energyConsumed,
+        });
+      }
+    }
+
+    res.json(Array.from(simMap.values()));
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch results" });
   }
 });
 
-async function seedClients(count: number) {
-  const deviceTypes = ["sensor", "wearable", "industrial", "vehicle", "gateway"] as const;
-  const clients = Array.from({ length: count }, (_, i) => ({
-    name: `IoT-Device-${String(i + 1).padStart(3, "0")}`,
-    deviceType: deviceTypes[i % deviceTypes.length],
-    trustScore: Math.round((0.3 + Math.random() * 0.7) * 100) / 100,
-    computeCapacity: Math.round((0.1 + Math.random() * 0.9) * 100) / 100,
-    batteryLevel: Math.round((0.2 + Math.random() * 0.8) * 100) / 100,
-    bandwidthMbps: Math.round((1 + Math.random() * 99) * 10) / 10,
-    isActive: true,
-  }));
-  await db.insert(iotClientsTable).values(clients);
+function buildSim(row: {
+  id: number; name: string; dataset: string; numClients: number; numRounds: number;
+  baseEpsilon: number; baseDelta: number; alphaWeight: number; betaWeight: number;
+  minTrustScore: number; resourceThreshold: number;
+  finalAccuracy: number; finalLoss: number; avgPrivacyLoss: number;
+  avgCommunicationCost: number; avgEnergyConsumption: number;
+  convergenceRound: number | null; createdAt: Date;
+}) {
+  return {
+    id: row.id,
+    name: row.name,
+    dataset: row.dataset,
+    numClients: row.numClients,
+    numRounds: row.numRounds,
+    baseEpsilon: row.baseEpsilon,
+    baseDelta: row.baseDelta,
+    alphaWeight: row.alphaWeight,
+    betaWeight: row.betaWeight,
+    minTrustScore: row.minTrustScore,
+    resourceThreshold: row.resourceThreshold,
+    finalAccuracy: row.finalAccuracy,
+    finalLoss: row.finalLoss,
+    avgPrivacyLoss: row.avgPrivacyLoss,
+    avgCommunicationCost: row.avgCommunicationCost,
+    avgEnergyConsumption: row.avgEnergyConsumption,
+    convergenceRound: row.convergenceRound,
+    createdAt: row.createdAt.toISOString(),
+    rounds: [] as Array<{
+      id: number; simulationId: number; roundNumber: number;
+      globalAccuracy: number; globalLoss: number; numSelectedClients: number;
+      avgNoiseScale: number; avgTrustScore: number; cumulativePrivacyLoss: number;
+      communicationCost: number; energyConsumed: number;
+    }>,
+  };
 }
 
 export default router;

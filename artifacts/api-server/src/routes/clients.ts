@@ -18,15 +18,27 @@ router.get("/", async (_req, res) => {
 router.post("/", async (req, res) => {
   try {
     const { name, deviceType, trustScore, computeCapacity, batteryLevel, bandwidthMbps } = req.body;
-    const [client] = await db.insert(iotClientsTable).values({
-      name,
-      deviceType,
-      trustScore,
-      computeCapacity,
-      batteryLevel,
-      bandwidthMbps,
-      isActive: true,
-    }).returning();
+    if (!name || !deviceType || trustScore == null || computeCapacity == null || batteryLevel == null || bandwidthMbps == null) {
+      res.status(400).json({ error: "Missing required fields: name, deviceType, trustScore, computeCapacity, batteryLevel, bandwidthMbps" });
+      return;
+    }
+    const validTypes = ["sensor", "wearable", "industrial", "vehicle", "gateway"];
+    if (!validTypes.includes(deviceType)) {
+      res.status(400).json({ error: `Invalid deviceType. Must be one of: ${validTypes.join(", ")}` });
+      return;
+    }
+    const [client] = await db
+      .insert(iotClientsTable)
+      .values({
+        name,
+        deviceType,
+        trustScore: Number(trustScore),
+        computeCapacity: Number(computeCapacity),
+        batteryLevel: Number(batteryLevel),
+        bandwidthMbps: Number(bandwidthMbps),
+        isActive: true,
+      })
+      .returning();
     res.status(201).json({ ...client, createdAt: client.createdAt.toISOString() });
   } catch (err) {
     console.error(err);
@@ -36,7 +48,11 @@ router.post("/", async (req, res) => {
 
 router.get("/:clientId", async (req, res) => {
   try {
-    const id = parseInt(req.params.clientId);
+    const id = Number(req.params.clientId);
+    if (Number.isNaN(id) || id <= 0) {
+      res.status(400).json({ error: "Invalid client ID" });
+      return;
+    }
     const [client] = await db.select().from(iotClientsTable).where(eq(iotClientsTable.id, id));
     if (!client) {
       res.status(404).json({ error: "Client not found" });

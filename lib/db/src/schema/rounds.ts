@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, real } from "drizzle-orm/pg-core";
+import { pgTable, serial, integer, real, index } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 import { simulationsTable } from "./simulations";
@@ -15,7 +15,9 @@ export const flRoundsTable = pgTable("fl_rounds", {
   cumulativePrivacyLoss: real("cumulative_privacy_loss").notNull(),
   communicationCost: real("communication_cost").notNull(),
   energyConsumed: real("energy_consumed").notNull(),
-});
+}, (t) => [
+  index("idx_fl_rounds_simulation_id").on(t.simulationId),
+]);
 
 export const insertFLRoundSchema = createInsertSchema(flRoundsTable).omit({ id: true });
 export type InsertFLRound = z.infer<typeof insertFLRoundSchema>;

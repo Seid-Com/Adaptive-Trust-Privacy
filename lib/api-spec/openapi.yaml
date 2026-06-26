@@ -29,6 +29,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /simulation/config:
     get:
@@ -59,6 +61,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimulationConfig"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /simulation/run:
     post:
@@ -78,6 +82,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/SimulationResult"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /simulation/results:
     get:
@@ -93,6 +99,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/SimulationResult"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /clients:
     get:
@@ -108,6 +116,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/IoTClient"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
     post:
       operationId: createClient
       tags: [clients]
@@ -125,6 +135,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/IoTClient"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /clients/{clientId}:
     get:
@@ -144,6 +158,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/IoTClient"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "404":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /rounds:
     get:
@@ -165,6 +185,10 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/FLRound"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
   /rounds/{roundId}/client-updates:
     get:
@@ -186,9 +210,22 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ClientUpdate"
+        "400":
+          $ref: "#/components/responses/ErrorResponse"
+        "500":
+          $ref: "#/components/responses/ErrorResponse"
 
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Human-readable error message
+      required:
+        - error
+
     HealthStatus:
       type: object
       properties:
@@ -436,3 +473,11 @@ components:
         - computeCapacity
         - batteryLevel
         - bandwidthMbps
+
+  responses:
+    ErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"

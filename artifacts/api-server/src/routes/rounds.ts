@@ -7,7 +7,11 @@ const router: IRouter = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const simId = req.query.simulationId ? parseInt(req.query.simulationId as string) : undefined;
+    const simId = req.query.simulationId ? Number(req.query.simulationId) : undefined;
+    if (simId !== undefined && (Number.isNaN(simId) || simId <= 0)) {
+      res.status(400).json({ error: "Invalid simulationId parameter" });
+      return;
+    }
     const rounds = simId
       ? await db.select().from(flRoundsTable).where(eq(flRoundsTable.simulationId, simId))
       : await db.select().from(flRoundsTable);
@@ -20,7 +24,11 @@ router.get("/", async (req, res) => {
 
 router.get("/:roundId/client-updates", async (req, res) => {
   try {
-    const roundId = parseInt(req.params.roundId);
+    const roundId = Number(req.params.roundId);
+    if (Number.isNaN(roundId) || roundId <= 0) {
+      res.status(400).json({ error: "Invalid round ID" });
+      return;
+    }
     const updates = await db.select().from(clientUpdatesTable).where(eq(clientUpdatesTable.roundId, roundId));
     res.json(updates);
   } catch (err) {

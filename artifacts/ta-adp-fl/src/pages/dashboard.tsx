@@ -622,7 +622,16 @@ plt.show()`,
   );
 }
 
-function StatCard({ title, value, icon: Icon, trend, color, bg }: any) {
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  icon: React.ComponentType<{ className?: string }>;
+  trend: string;
+  color: string;
+  bg: string;
+}
+
+function StatCard({ title, value, icon: Icon, trend, color, bg }: StatCardProps) {
   return (
     <Card className="glass-panel-hover border-white/5 overflow-hidden group">
       <CardContent className="p-6 relative">

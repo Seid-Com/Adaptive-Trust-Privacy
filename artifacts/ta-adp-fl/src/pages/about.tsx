@@ -1,19 +1,35 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { BookOpen, Shield, Cpu, Network } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
+
+interface FeatureCardProps {
+  icon: LucideIcon;
+  title: string;
+  desc: string;
+}
+
+function FeatureCard({ icon: Icon, title, desc }: FeatureCardProps) {
+  return (
+    <Card className="glass-panel border-white/5 hover:border-white/10 transition-colors">
+      <CardContent className="p-6">
+        <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4">
+          <Icon className="h-5 w-5 text-primary" />
+        </div>
+        <h3 className="font-bold text-white mb-2">{title}</h3>
+        <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+      </CardContent>
+    </Card>
+  );
+}
 
 export default function About() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="max-w-4xl mx-auto space-y-12 pb-12">
-      
+
       {/* Hero Section */}
-      <div className="relative rounded-3xl overflow-hidden h-64 border border-white/10 shadow-2xl">
-        <img 
-          src={`${import.meta.env.BASE_URL}images/about-hero.png`} 
-          alt="Neural Network over Smart City" 
-          className="absolute inset-0 w-full h-full object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+      <div className="relative rounded-3xl overflow-hidden h-64 border border-white/10 shadow-2xl bg-gradient-to-br from-primary/20 via-background to-accent/20">
         <div className="absolute inset-0 p-8 flex flex-col justify-end">
           <Badge variant="outline" className="w-fit mb-3 bg-primary/20 text-primary border-primary/30 backdrop-blur-md">Research Prototype</Badge>
           <h1 className="text-4xl md:text-5xl font-display font-extrabold text-white leading-tight">
@@ -26,20 +42,20 @@ export default function About() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <FeatureCard 
-          icon={Shield} 
-          title="Adaptive Privacy" 
-          desc="Dynamically scales noise variance based on individual client trust scores, preserving model utility." 
+        <FeatureCard
+          icon={Shield}
+          title="Adaptive Privacy"
+          desc="Dynamically scales noise variance based on individual client trust scores, preserving model utility."
         />
-        <FeatureCard 
-          icon={Cpu} 
-          title="Resource Aware" 
-          desc="Selects clients based on compute capacity and battery life, preventing stragglers." 
+        <FeatureCard
+          icon={Cpu}
+          title="Resource Aware"
+          desc="Selects clients based on compute capacity and battery life, preventing stragglers."
         />
-        <FeatureCard 
-          icon={Network} 
-          title="IoT Optimized" 
-          desc="Reduces communication overhead while maintaining formal (ε, δ)-DP guarantees." 
+        <FeatureCard
+          icon={Network}
+          title="IoT Optimized"
+          desc="Reduces communication overhead while maintaining formal (ε, δ)-DP guarantees."
         />
       </div>
 
@@ -73,28 +89,5 @@ export default function About() {
         </section>
       </div>
     </motion.div>
-  );
-}
-
-function FeatureCard({ icon: Icon, title, desc }: any) {
-  return (
-    <Card className="glass-panel border-white/5 hover:border-white/10 transition-colors">
-      <CardContent className="p-6">
-        <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4">
-          <Icon className="h-5 w-5 text-primary" />
-        </div>
-        <h3 className="font-bold text-white mb-2">{title}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
-      </CardContent>
-    </Card>
-  );
-}
-
-// Simple Badge component inline since it's not imported above
-function Badge({ children, className, variant = "default" }: any) {
-  return (
-    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 ${className}`}>
-      {children}
-    </span>
   );
 }
