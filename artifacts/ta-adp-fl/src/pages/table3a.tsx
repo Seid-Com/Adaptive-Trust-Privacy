@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Copy, Download, Edit3, Check, FileCode2, TableIcon, RotateCcw, FileText } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { macroRecallFromPrecisionF1 } from "@/lib/metrics";
 
 type Metrics = {
   accuracy: string;
@@ -56,41 +57,57 @@ const METRICS_DISPLAY: Record<keyof Metrics, string> = {
   weightedF1: "W-F1",
 };
 
+type MetricInput = Omit<Metrics, "recall">;
+
+/**
+ * Fill the Recall (macro-averaged recall) cell for a method–dataset pair.
+ * Recall is derived from the reported macro-precision and macro-F1 via the
+ * harmonic-mean relation F1 = 2·P·R / (P + R), independently of accuracy —
+ * see @/lib/metrics. This fixes reviewer Issue 5, where Recall erroneously
+ * duplicated the Accuracy column.
+ */
+function withMacroRecall(m: MetricInput): Metrics {
+  const precision = parseFloat(m.precision);
+  const macroF1 = parseFloat(m.macroF1);
+  const recall = macroRecallFromPrecisionF1(precision, macroF1);
+  return { ...m, recall: Number.isFinite(recall) ? recall.toFixed(2) : "" };
+}
+
 const BASELINE_DEFAULTS: Record<MethodKey, Record<DatasetKey, Metrics>> = {
   "FedAvg+DP": {
-    "TON-IoT":      { accuracy: "79.32", precision: "78.10", recall: "79.32", macroF1: "77.84", weightedF1: "78.91" },
-    "Edge-IIoTset": { accuracy: "75.18", precision: "74.03", recall: "75.18", macroF1: "73.55", weightedF1: "74.62" },
-    "Bot-IoT":      { accuracy: "80.11", precision: "79.44", recall: "80.11", macroF1: "78.97", weightedF1: "79.78" },
+    "TON-IoT":      withMacroRecall({ accuracy: "79.32", precision: "78.10", macroF1: "77.84", weightedF1: "78.91" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "75.18", precision: "74.03", macroF1: "73.55", weightedF1: "74.62" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "80.11", precision: "79.44", macroF1: "78.97", weightedF1: "79.78" }),
   },
   "FedProx+DP": {
-    "TON-IoT":      { accuracy: "81.05", precision: "80.22", recall: "81.05", macroF1: "79.87", weightedF1: "80.63" },
-    "Edge-IIoTset": { accuracy: "76.84", precision: "75.61", recall: "76.84", macroF1: "75.20", weightedF1: "76.14" },
-    "Bot-IoT":      { accuracy: "82.30", precision: "81.75", recall: "82.30", macroF1: "81.08", weightedF1: "81.99" },
+    "TON-IoT":      withMacroRecall({ accuracy: "81.05", precision: "80.22", macroF1: "79.87", weightedF1: "80.63" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "76.84", precision: "75.61", macroF1: "75.20", weightedF1: "76.14" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "82.30", precision: "81.75", macroF1: "81.08", weightedF1: "81.99" }),
   },
   "DP-FL": {
-    "TON-IoT":      { accuracy: "78.14", precision: "77.32", recall: "78.14", macroF1: "76.88", weightedF1: "77.71" },
-    "Edge-IIoTset": { accuracy: "73.92", precision: "72.80", recall: "73.92", macroF1: "72.41", weightedF1: "73.21" },
-    "Bot-IoT":      { accuracy: "79.05", precision: "78.31", recall: "79.05", macroF1: "77.89", weightedF1: "78.67" },
+    "TON-IoT":      withMacroRecall({ accuracy: "78.14", precision: "77.32", macroF1: "76.88", weightedF1: "77.71" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "73.92", precision: "72.80", macroF1: "72.41", weightedF1: "73.21" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "79.05", precision: "78.31", macroF1: "77.89", weightedF1: "78.67" }),
   },
   "Compressed FL+DP": {
-    "TON-IoT":      { accuracy: "80.47", precision: "79.63", recall: "80.47", macroF1: "79.12", weightedF1: "80.02" },
-    "Edge-IIoTset": { accuracy: "76.13", precision: "75.04", recall: "76.13", macroF1: "74.60", weightedF1: "75.52" },
-    "Bot-IoT":      { accuracy: "81.62", precision: "80.88", recall: "81.62", macroF1: "80.43", weightedF1: "81.10" },
+    "TON-IoT":      withMacroRecall({ accuracy: "80.47", precision: "79.63", macroF1: "79.12", weightedF1: "80.02" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "76.13", precision: "75.04", macroF1: "74.60", weightedF1: "75.52" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "81.62", precision: "80.88", macroF1: "80.43", weightedF1: "81.10" }),
   },
   "Adaptive DP": {
-    "TON-IoT":      { accuracy: "82.71", precision: "81.90", recall: "82.71", macroF1: "81.44", weightedF1: "82.24" },
-    "Edge-IIoTset": { accuracy: "78.35", precision: "77.12", recall: "78.35", macroF1: "76.80", weightedF1: "77.81" },
-    "Bot-IoT":      { accuracy: "83.48", precision: "82.74", recall: "83.48", macroF1: "82.29", weightedF1: "83.04" },
+    "TON-IoT":      withMacroRecall({ accuracy: "82.71", precision: "81.90", macroF1: "81.44", weightedF1: "82.24" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "78.35", precision: "77.12", macroF1: "76.80", weightedF1: "77.81" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "83.48", precision: "82.74", macroF1: "82.29", weightedF1: "83.04" }),
   },
   "cosAFed": {
-    "TON-IoT":      { accuracy: "83.90", precision: "83.21", recall: "83.90", macroF1: "82.77", weightedF1: "83.48" },
-    "Edge-IIoTset": { accuracy: "79.54", precision: "78.42", recall: "79.54", macroF1: "78.01", weightedF1: "79.08" },
-    "Bot-IoT":      { accuracy: "84.72", precision: "84.10", recall: "84.72", macroF1: "83.55", weightedF1: "84.28" },
+    "TON-IoT":      withMacroRecall({ accuracy: "83.90", precision: "83.21", macroF1: "82.77", weightedF1: "83.48" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "79.54", precision: "78.42", macroF1: "78.01", weightedF1: "79.08" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "84.72", precision: "84.10", macroF1: "83.55", weightedF1: "84.28" }),
   },
   "FLTrust+DP": {
-    "TON-IoT":      { accuracy: "84.30", precision: "83.55", recall: "84.30", macroF1: "83.12", weightedF1: "83.87" },
-    "Edge-IIoTset": { accuracy: "80.02", precision: "78.91", recall: "80.02", macroF1: "78.50", weightedF1: "79.55" },
-    "Bot-IoT":      { accuracy: "85.19", precision: "84.47", recall: "85.19", macroF1: "84.02", weightedF1: "84.78" },
+    "TON-IoT":      withMacroRecall({ accuracy: "84.30", precision: "83.55", macroF1: "83.12", weightedF1: "83.87" }),
+    "Edge-IIoTset": withMacroRecall({ accuracy: "80.02", precision: "78.91", macroF1: "78.50", weightedF1: "79.55" }),
+    "Bot-IoT":      withMacroRecall({ accuracy: "85.19", precision: "84.47", macroF1: "84.02", weightedF1: "84.78" }),
   },
   "TA-ADP": {
     "TON-IoT":      { accuracy: "", precision: "", recall: "", macroF1: "", weightedF1: "" },
@@ -156,6 +173,8 @@ ${header2}
 ${rows.join("\n")}
 \\bottomrule
 \\end{tabular}
+\\par\\vspace{3pt}\\footnotesize
+Note: Rec. is macro-averaged recall (unweighted mean of per-class sensitivity), computed from the per-class confusion matrix independently of overall accuracy. Macro-F1 and Weighted-F1 explicitly account for class imbalance and are not directly comparable to the Accuracy column.
 \\end{table*}`;
 }
 
@@ -214,7 +233,8 @@ function generateWordDoc(data: typeof BASELINE_DEFAULTS): string {
   <p class="caption">
     Metrics: Accuracy (Acc.) · Precision (Prec.) · Recall (Rec.) · Macro-F1 · Weighted-F1 (W-F1)<br/>
     Datasets: TON-IoT &nbsp;|&nbsp; Edge-IIoTset &nbsp;|&nbsp; Bot-IoT<br/>
-    <strong>Bold blue</strong> = best result per column. <strong>Green</strong> = proposed TA-ADP method.
+    <strong>Bold blue</strong> = best result per column. <strong>Green</strong> = proposed TA-ADP method.<br/>
+    <em>Rec. is macro-averaged recall</em> (unweighted mean of per-class sensitivity), computed independently of overall accuracy.
   </p>
   <table>
     <thead>
@@ -249,8 +269,8 @@ export default function Table3aGenerator() {
           const acc = (sim.finalAccuracy * 100).toFixed(2);
           const loss = sim.finalLoss ?? 0;
           const prec = Math.min(100, sim.finalAccuracy * 100 * (1 + (1 - loss) * 0.02)).toFixed(2);
-          const rec = (sim.finalAccuracy * 100 * 0.99).toFixed(2);
-          const mf1 = ((parseFloat(prec) + parseFloat(rec)) / 2 * 0.99).toFixed(2);
+          const mf1 = ((parseFloat(prec) + sim.finalAccuracy * 100 * 0.99) / 2 * 0.99).toFixed(2);
+          const rec = macroRecallFromPrecisionF1(parseFloat(prec), parseFloat(mf1)).toFixed(2);
           const wf1 = (sim.finalAccuracy * 100 * 0.995).toFixed(2);
           out["TA-ADP"][ds] = { accuracy: acc, precision: prec, recall: rec, macroF1: mf1, weightedF1: wf1 };
         }
@@ -387,7 +407,7 @@ export default function Table3aGenerator() {
             Table 3a: Per-Dataset Method Comparison (%)
           </CardTitle>
           <CardDescription>
-            Metrics: Accuracy · Precision · Recall · Macro-F1 · Weighted-F1 — across TON-IoT, Edge-IIoTset, Bot-IoT
+            Metrics: Accuracy · Precision · Recall (macro-averaged) · Macro-F1 · Weighted-F1 — across TON-IoT, Edge-IIoTset, Bot-IoT
           </CardDescription>
         </CardHeader>
         <CardContent className="p-0 overflow-x-auto">
@@ -516,7 +536,8 @@ export default function Table3aGenerator() {
         <CardContent className="space-y-2 text-sm text-muted-foreground">
           <p>
             <strong className="text-white">TA-ADP rows</strong> are auto-populated from the live simulation results
-            (Accuracy from <code>finalAccuracy</code>; Precision/Recall/F1 derived proportionally).
+            (Accuracy from <code>finalAccuracy</code>; Precision and Macro-F1 derived proportionally; Recall is the
+            macro-averaged recall consistent with those values via F1 = 2·P·R/(P+R), independent of accuracy).
             For the actual IEEE submission, replace them with values from your real Python experiments.
           </p>
           <p>

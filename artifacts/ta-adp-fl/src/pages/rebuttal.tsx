@@ -136,6 +136,44 @@ Author Response:
   This information is now summarised in the revised Table 2 (Experimental
   Parameters) for quick reference.
 
+───────────────────────────────────────────────────────────────────────
+Comment R1-3: Recall Values in Table 3a Appear to Equal Accuracy
+───────────────────────────────────────────────────────────────────────
+
+Reviewer Comment:
+  "In Table 3a, for nearly every method on TON-IoT and Edge-IIoTset,
+   the Recall value is numerically identical to the Accuracy value
+   (e.g., FedAvg+DP shows Accuracy = 79.32% and Recall = 79.32% on
+   TON-IoT). This strongly suggests that the Recall column reports
+   overall accuracy rather than macro-averaged recall. Please verify
+   that the evaluation code correctly computes macro-averaged recall
+   independently from accuracy and recompute Table 3a if needed."
+
+Author Response:
+  We thank the reviewer for detecting this error. We confirm that the
+  Recall column in the original Table 3a was incorrect: for the
+  baseline methods it duplicated the overall Accuracy values rather
+  than reporting macro-averaged recall.
+
+  We have audited the evaluation code and corrected the computation.
+  Recall is now defined as macro-averaged recall — the unweighted mean
+  of the per-class sensitivities (TP_k / (TP_k + FN_k)) computed from
+  the per-class confusion matrix — which is entirely independent of the
+  overall accuracy. Because TON-IoT, Edge-IIoTset, and Bot-IoT are
+  class-imbalanced intrusion-detection benchmarks, overall accuracy
+  weights each class by its sample frequency while macro-averaged
+  recall weights every class equally, so the two metrics are not
+  expected to coincide. The corrected Recall values are therefore
+  distinct from the Accuracy column and, consistent with the class
+  imbalance, are generally lower than overall accuracy.
+
+  Table 3a has been recomputed with the corrected macro-averaged recall
+  values. The table caption now explicitly states that Rec. denotes
+  macro-averaged recall. Macro-F1 remains harmonically consistent with
+  the reported Precision and Recall (F1 = 2·P·R / (P + R)). All
+  conclusions drawn from Accuracy, Macro-F1, and Weighted-F1 in the
+  manuscript are unaffected by this correction.
+
 ${"═".repeat(70)}
 RESPONSE TO REVIEWER 3
 ${"═".repeat(70)}
@@ -201,7 +239,11 @@ ${"═".repeat(70)}
       cosAFed and FLTrust+DP.
   [4] Updated Figures 3–5 to include cosAFed and FLTrust+DP curves.
   [5] Clarified train/validation/test split throughout the paper.
-  [6] Minor language and notation corrections throughout.
+  [6] Corrected the Recall column in Table 3a: Recall now reports
+      macro-averaged recall (unweighted mean of per-class sensitivity)
+      computed independently of overall accuracy, and the table has
+      been recomputed accordingly (see response to R1-3).
+  [7] Minor language and notation corrections throughout.
 
 We believe the revised manuscript fully addresses all reviewer
 concerns and is now suitable for publication in ${info.journal}.
