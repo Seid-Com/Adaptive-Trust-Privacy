@@ -1,0 +1,38 @@
+{
+  "dataset": "Bot-IoT",
+  "nSamples": 300000,
+  "nFeatures": 26,
+  "nClasses": 2,
+  "classNames": [
+    "Normal",
+    "Reconnaissance"
+  ],
+  "featureNames": [
+    "pkSeqID",
+    "stime",
+    "flgs",
+    "proto",
+    "saddr",
+    "sport",
+    "daddr",
+    "dport",
+    "pkts",
+    "bytes",
+    "state",
+    "ltime",
+    "seq",
+    "dur",
+    "mean",
+    "stddev",
+    "sum",
+    "min",
+    "max",
+    "spkts",
+    "dpkts",
+    "sbytes",
+    "dbytes",
+    "rate",
+    "srate",
+    "drate"
+  ]
+}

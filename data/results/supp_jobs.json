@@ -1,0 +1,1387 @@
+[
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "full"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "full"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "full"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "full"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "full"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "adaptive_sigma_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "adaptive_sigma_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "adaptive_sigma_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "adaptive_sigma_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "adaptive_sigma_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "trust_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "trust_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "trust_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "trust_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "trust_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": false,
+   "variant": "selection_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": false,
+   "variant": "selection_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": false,
+   "variant": "selection_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": false,
+   "variant": "selection_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": false,
+   "variant": "selection_only"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_trust"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_trust"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_trust"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_trust"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": true,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_trust"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_resource"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_resource"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_resource"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_resource"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": false,
+   "adaptive_noise": true,
+   "adaptive_selection": true,
+   "variant": "no_resource"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_adaptive_noise"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_adaptive_noise"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_adaptive_noise"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_adaptive_noise"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": true,
+   "use_resource": true,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_adaptive_noise"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_both"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_both"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_both"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 63,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_both"
+  }
+ },
+ {
+  "out": "results_ablation.json",
+  "method": "TA-ADP",
+  "seed": 70,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "use_trust": false,
+   "use_resource": false,
+   "adaptive_noise": false,
+   "adaptive_selection": true,
+   "variant": "no_both"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 10,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 10,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 10,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 10,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 10,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 10,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 50,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 50,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 50,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 50,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 50,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 50,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 100,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 100,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 100,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 100,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 100,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_scalability.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 100,
+  "rounds": 100,
+  "cfg": {
+   "variant": "scalability"
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 1.0,
+   "sigma_base": 5.8662424441220935,
+   "sigma_max": 7.332803055152617
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 2.0,
+   "sigma_base": 2.54774833786485,
+   "sigma_max": 3.1846854223310626
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 3.0,
+   "sigma_base": 1.893006122658372,
+   "sigma_max": 2.366257653322965
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 4.0,
+   "sigma_base": 1.573177158590716,
+   "sigma_max": 1.966471448238395
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "TA-ADP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "FedAvg+DP",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 42,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 49,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ },
+ {
+  "out": "results_eps_sweep.json",
+  "method": "cosAFed",
+  "seed": 56,
+  "n_clients": 20,
+  "rounds": 100,
+  "cfg": {
+   "variant": "eps_sweep",
+   "target_eps": 5.0,
+   "sigma_base": 1.374826723790549,
+   "sigma_max": 1.7185334047381862
+  }
+ }
+]

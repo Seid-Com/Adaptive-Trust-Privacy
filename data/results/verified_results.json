@@ -1,0 +1,422 @@
+[
+  {
+    "dataset": "TON-IoT",
+    "method": "FedAvg+DP",
+    "attack": "none",
+    "accuracy": 0.2395,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FedAvg+DP",
+    "attack": "sign_flip",
+    "accuracy": 0.0925,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FedAvg+DP",
+    "attack": "label_flip",
+    "accuracy": 0.003,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FedAvg+DP",
+    "attack": "scaling",
+    "accuracy": 0.275,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Krum",
+    "attack": "none",
+    "accuracy": 0.363,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Krum",
+    "attack": "sign_flip",
+    "accuracy": 0.093,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Krum",
+    "attack": "label_flip",
+    "accuracy": 0.2675,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Krum",
+    "attack": "scaling",
+    "accuracy": 0.1515,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Trimmed Mean",
+    "attack": "none",
+    "accuracy": 0.363,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Trimmed Mean",
+    "attack": "sign_flip",
+    "accuracy": 0.093,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Trimmed Mean",
+    "attack": "label_flip",
+    "accuracy": 0.3965,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "Trimmed Mean",
+    "attack": "scaling",
+    "accuracy": 0.0605,
+    "epsilon": 0
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FLTrust+DP",
+    "attack": "none",
+    "accuracy": 0.1665,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FLTrust+DP",
+    "attack": "sign_flip",
+    "accuracy": 0.1,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FLTrust+DP",
+    "attack": "label_flip",
+    "accuracy": 0.003,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "FLTrust+DP",
+    "attack": "scaling",
+    "accuracy": 0.237,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "TA-ADP",
+    "attack": "none",
+    "accuracy": 0.3825,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "TA-ADP",
+    "attack": "sign_flip",
+    "accuracy": 0.093,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "TA-ADP",
+    "attack": "label_flip",
+    "accuracy": 0.382,
+    "epsilon": 3
+  },
+  {
+    "dataset": "TON-IoT",
+    "method": "TA-ADP",
+    "attack": "scaling",
+    "accuracy": 0.0605,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FedAvg+DP",
+    "attack": "none",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FedAvg+DP",
+    "attack": "sign_flip",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FedAvg+DP",
+    "attack": "label_flip",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FedAvg+DP",
+    "attack": "scaling",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Krum",
+    "attack": "none",
+    "accuracy": 0.7295,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Krum",
+    "attack": "sign_flip",
+    "accuracy": 0.0105,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Krum",
+    "attack": "label_flip",
+    "accuracy": 0.0215,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Krum",
+    "attack": "scaling",
+    "accuracy": 0.776,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Trimmed Mean",
+    "attack": "none",
+    "accuracy": 0.751,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Trimmed Mean",
+    "attack": "sign_flip",
+    "accuracy": 0.0105,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Trimmed Mean",
+    "attack": "label_flip",
+    "accuracy": 0.0215,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "Trimmed Mean",
+    "attack": "scaling",
+    "accuracy": 0.781,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FLTrust+DP",
+    "attack": "none",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FLTrust+DP",
+    "attack": "sign_flip",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FLTrust+DP",
+    "attack": "label_flip",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "FLTrust+DP",
+    "attack": "scaling",
+    "accuracy": 0.0515,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "TA-ADP",
+    "attack": "none",
+    "accuracy": 0.0215,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "TA-ADP",
+    "attack": "sign_flip",
+    "accuracy": 0.0105,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "TA-ADP",
+    "attack": "label_flip",
+    "accuracy": 0.0215,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Edge-IIoTset",
+    "method": "TA-ADP",
+    "attack": "scaling",
+    "accuracy": 0.7295,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FedAvg+DP",
+    "attack": "none",
+    "accuracy": 0.9565,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FedAvg+DP",
+    "attack": "sign_flip",
+    "accuracy": 0.014,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FedAvg+DP",
+    "attack": "label_flip",
+    "accuracy": 0.024,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FedAvg+DP",
+    "attack": "scaling",
+    "accuracy": 0.9975,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Krum",
+    "attack": "none",
+    "accuracy": 0.9975,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Krum",
+    "attack": "sign_flip",
+    "accuracy": 0.0025,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Krum",
+    "attack": "label_flip",
+    "accuracy": 0.0795,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Krum",
+    "attack": "scaling",
+    "accuracy": 0.9975,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Trimmed Mean",
+    "attack": "none",
+    "accuracy": 0.9975,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Trimmed Mean",
+    "attack": "sign_flip",
+    "accuracy": 0.0025,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Trimmed Mean",
+    "attack": "label_flip",
+    "accuracy": 0.3765,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "Trimmed Mean",
+    "attack": "scaling",
+    "accuracy": 0.9975,
+    "epsilon": 0
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FLTrust+DP",
+    "attack": "none",
+    "accuracy": 0.9565,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FLTrust+DP",
+    "attack": "sign_flip",
+    "accuracy": 0.015,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FLTrust+DP",
+    "attack": "label_flip",
+    "accuracy": 0.024,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "FLTrust+DP",
+    "attack": "scaling",
+    "accuracy": 0.9615,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "TA-ADP",
+    "attack": "none",
+    "accuracy": 0.9975,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "TA-ADP",
+    "attack": "sign_flip",
+    "accuracy": 0.0025,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "TA-ADP",
+    "attack": "label_flip",
+    "accuracy": 0.0965,
+    "epsilon": 3
+  },
+  {
+    "dataset": "Bot-IoT",
+    "method": "TA-ADP",
+    "attack": "scaling",
+    "accuracy": 0.9975,
+    "epsilon": 3
+  }
+]

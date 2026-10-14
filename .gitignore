@@ -1,0 +1,118 @@
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# compiled output
+dist
+tmp
+out-tsc
+*.tsbuildinfo
+.expo
+.expo-shared
+
+# dependencies
+node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# System Files
+.DS_Store
+Thumbs.db
+
+.cursor/rules/nx-rules.mdc
+.github/instructions/nx.instructions.md
+
+# Replit
+.cache/
+.local/
+
+# --- Release curation ---
+# Manuscript / internal review material (never uploaded)
+/manuscript_*.md
+/experiment-results.md
+/R2.pdf
+data/review/
+
+# Raw datasets (regenerate via scripts/download_datasets.py)
+data/**/*.csv
+
+# Python
+__pycache__/
+*.pyc
+
+# Backups and one-off local artifacts
+*.bak*
+*.bak525
+*.log
+*.err
+*.flag
+*.pid
+scripts/*.bat
+scripts/*.mjs
+scripts/*.cjs
+scripts/bench*.js
+scripts/src/
+scripts/node_modules/
+scripts/tsconfig.json
+scripts/package.json
+scripts/manuscript_vs_measured.txt
+
+# One-off local scripts (superseded by fl_train_np.py / run_supp.py or machine-specific)
+scripts/check_results.py
+scripts/compare_all.py
+scripts/compute_table6_stats.py
+scripts/final_summary.py
+scripts/fl_train_sklearn.py
+scripts/journal_artifacts.py
+scripts/launch_detached.py
+scripts/launch_supp.py
+scripts/merge_all.py
+scripts/merge_log.py
+scripts/partition_fl.py
+scripts/pooled_test.py
+scripts/reprocess.py
+scripts/rerun525_delta.py
+scripts/run_attacks_parallel.py
+scripts/run_experiment.py
+scripts/run_pooled_all.py
+scripts/run_sigma_sweep.py
+scripts/split_results.py
+
+# Web-app prototype (kept on disk only; not part of the repository)
+/artifacts/
+/lib/
+/.npmrc
+/package.json
+/pnpm-lock.yaml
+/pnpm-workspace.yaml
+/tsconfig.base.json
+/tsconfig.json
+/scripts/post-merge.sh
+
